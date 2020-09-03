@@ -1,9 +1,8 @@
 package dao;
 
-import model.Product;
-
 import java.util.List;
 import java.util.Optional;
+import model.Product;
 
 public interface ProductDao {
 

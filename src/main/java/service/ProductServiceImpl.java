@@ -1,11 +1,10 @@
 package service;
 
-
 import dao.ProductDao;
+import java.util.List;
 import lib.Inject;
 import lib.Service;
 import model.Product;
-import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {

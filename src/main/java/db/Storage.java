@@ -1,11 +1,11 @@
 package db;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Order;
 import model.Product;
 import model.ShoppingCart;
 import model.User;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Storage {
     public static final List<Product> products = new ArrayList<>();
@@ -21,6 +21,7 @@ public class Storage {
         product.setId(++productId);
         products.add(product);
     }
+
     public static void addOrder(Order order) {
         order.setId(++orderId);
         orders.add(order);

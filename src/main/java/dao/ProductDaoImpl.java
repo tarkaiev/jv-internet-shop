@@ -1,15 +1,14 @@
 package dao;
 
 import db.Storage;
-import lib.Dao;
-import model.Product;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
+import lib.Dao;
+import model.Product;
 
 @Dao
-public class ProductDaoImpl implements ProductDao{
+public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product create(Product product) {

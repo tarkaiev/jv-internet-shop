@@ -1,17 +1,16 @@
 package service;
 
-import model.Product;
-
 import java.util.List;
+import model.Product;
 
 public interface ProductService {
     Product create(Product product);
 
-    Product get (long id);
+    Product get(long id);
 
     List<Product> getAllProducts();
 
-    Product update (Product product);
+    Product update(Product product);
 
-    boolean delete (long id);
+    boolean delete(long id);
 }
