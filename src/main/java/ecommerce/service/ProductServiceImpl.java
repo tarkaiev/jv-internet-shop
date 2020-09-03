@@ -1,10 +1,10 @@
-package service;
+package ecommerce.service;
 
-import dao.ProductDao;
+import ecommerce.dao.ProductDao;
+import ecommerce.lib.Inject;
+import ecommerce.lib.Service;
+import ecommerce.model.Product;
 import java.util.List;
-import lib.Inject;
-import lib.Service;
-import model.Product;
 
 @Service
 public class ProductServiceImpl implements ProductService {

@@ -1,4 +1,4 @@
-package model;
+package ecommerce.model;
 
 public class Product {
     private long id;
@@ -38,5 +38,12 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id
+                + ", name='" + name + '\''
+                + ", price=" + price + '}';
     }
 }

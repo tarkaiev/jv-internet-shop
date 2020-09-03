@@ -1,11 +1,11 @@
-package db;
+package ecommerce.db;
 
+import ecommerce.model.Order;
+import ecommerce.model.Product;
+import ecommerce.model.ShoppingCart;
+import ecommerce.model.User;
 import java.util.ArrayList;
 import java.util.List;
-import model.Order;
-import model.Product;
-import model.ShoppingCart;
-import model.User;
 
 public class Storage {
     public static final List<Product> products = new ArrayList<>();

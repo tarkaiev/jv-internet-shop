@@ -1,8 +1,8 @@
-package dao;
+package ecommerce.dao;
 
+import ecommerce.model.Product;
 import java.util.List;
 import java.util.Optional;
-import model.Product;
 
 public interface ProductDao {
 

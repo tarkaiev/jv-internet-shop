@@ -1,7 +1,7 @@
-package service;
+package ecommerce.service;
 
+import ecommerce.model.Product;
 import java.util.List;
-import model.Product;
 
 public interface ProductService {
     Product create(Product product);

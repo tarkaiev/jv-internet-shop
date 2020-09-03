@@ -1,11 +1,11 @@
-package dao;
+package ecommerce.dao;
 
-import db.Storage;
+import ecommerce.db.Storage;
+import ecommerce.lib.Dao;
+import ecommerce.model.Product;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
-import lib.Dao;
-import model.Product;
 
 @Dao
 public class ProductDaoImpl implements ProductDao {

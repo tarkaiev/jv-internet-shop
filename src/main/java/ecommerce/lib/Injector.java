@@ -1,4 +1,4 @@
-package lib;
+package ecommerce.lib;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,16 +1,16 @@
-package model;
+package ecommerce.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class ShoppingCart {
     private long id;
     private List<Product> products;
     private long userId;
 
-    public Order(long userId) {
-        this.userId = userId;
+    public ShoppingCart(long userId) {
         this.products = new ArrayList<>();
+        this.userId = userId;
     }
 
     public long getId() {

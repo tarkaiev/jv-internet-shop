@@ -1,4 +1,4 @@
-package model;
+package ecommerce.model;
 
 public class User {
     private long id;
