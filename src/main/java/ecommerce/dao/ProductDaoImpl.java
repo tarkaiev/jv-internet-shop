@@ -19,7 +19,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Optional<Product> get(Long id) {
         return Storage.products.stream()
-                .filter(prod -> prod.getId() == id)
+                .filter(prod -> prod.getId().equals(id))
                 .findFirst();
     }
 
@@ -31,13 +31,13 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product update(Product product) {
         IntStream.range(0, Storage.products.size())
-                .filter(i -> Storage.products.get(i).getId() == (product.getId()))
+                .filter(i -> Storage.products.get(i).getId().equals(product.getId()))
                 .forEach(i -> Storage.products.set(i, product));
         return product;
     }
 
     @Override
     public boolean delete(Long id) {
-        return Storage.products.removeIf(x -> x.getId() == (id));
+        return Storage.products.removeIf(product -> product.getId().equals(id));
     }
 }

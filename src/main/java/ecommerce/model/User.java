@@ -1,7 +1,7 @@
 package ecommerce.model;
 
 public class User {
-    private long id;
+    private Long id;
     private String name;
     private String login;
     private String password;
@@ -12,11 +12,11 @@ public class User {
         this.password = password;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private long id;
+    private Long id;
     private List<Product> products;
-    private long userId;
+    private Long userId;
 
-    public Order(long userId) {
+    public Order(Long userId) {
         this.userId = userId;
         this.products = new ArrayList<>();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -29,11 +29,11 @@ public class Order {
         this.products = products;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }
