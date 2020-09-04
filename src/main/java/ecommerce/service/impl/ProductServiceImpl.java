@@ -1,9 +1,10 @@
-package ecommerce.service;
+package ecommerce.service.impl;
 
 import ecommerce.dao.ProductDao;
 import ecommerce.lib.Inject;
 import ecommerce.lib.Service;
 import ecommerce.model.Product;
+import ecommerce.service.ProductService;
 import java.util.List;
 
 @Service
