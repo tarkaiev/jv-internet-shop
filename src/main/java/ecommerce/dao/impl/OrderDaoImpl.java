@@ -2,12 +2,14 @@ package ecommerce.dao.impl;
 
 import ecommerce.dao.OrderDao;
 import ecommerce.db.Storage;
+import ecommerce.lib.Dao;
 import ecommerce.model.Order;
 import ecommerce.model.ShoppingCart;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Dao
 public class OrderDaoImpl implements OrderDao {
 
     @Override
