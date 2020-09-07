@@ -11,10 +11,10 @@ import ecommerce.service.ShoppingCartService;
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Inject
-    ShoppingCartDao shoppingCartDao;
+    private ShoppingCartDao shoppingCartDao;
 
     @Inject
-    ProductDao productDao;
+    private ProductDao productDao;
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
@@ -23,23 +23,25 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        shoppingCart.getProducts().add(productDao.get(product.getId()).get());
+        shoppingCart.getProducts().add(product);
+        shoppingCartDao.update(shoppingCart);
         return shoppingCart;
     }
 
     @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
+        shoppingCartDao.update(shoppingCart);
         return shoppingCart.getProducts().remove(product);
     }
 
     @Override
     public void clear(ShoppingCart shoppingCart) {
-        shoppingCart.getProducts().removeAll(shoppingCart.getProducts());
+        shoppingCart.getProducts().clear();
     }
 
     @Override
     public ShoppingCart getByUserId(Long userId) {
-        return shoppingCartDao.get(userId).get();
+        return shoppingCartDao.getByUserId(userId).get();
     }
 
     @Override

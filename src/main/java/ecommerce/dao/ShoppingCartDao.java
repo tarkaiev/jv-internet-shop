@@ -8,7 +8,7 @@ public interface ShoppingCartDao {
 
     ShoppingCart create(ShoppingCart cart);
 
-    Optional<ShoppingCart> get(Long id);
+    Optional<ShoppingCart> getByUserId(Long id);
 
     List<ShoppingCart> getAll();
 

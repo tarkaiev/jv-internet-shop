@@ -6,19 +6,23 @@ import ecommerce.lib.Service;
 import ecommerce.model.Order;
 import ecommerce.model.ShoppingCart;
 import ecommerce.service.OrderService;
+import ecommerce.service.ShoppingCartService;
 import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Inject
-    OrderDao orderDao;
+    private OrderDao orderDao;
+
+    @Inject
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {
-        Order order = orderDao.completeOrder(shoppingCart);
+        Order order = new Order(shoppingCart.getUserId());
         order.setProducts(shoppingCart.getProducts());
-        shoppingCart.getProducts().removeAll(shoppingCart.getProducts());
+        shoppingCartService.clear(shoppingCart);
         return order;
     }
 

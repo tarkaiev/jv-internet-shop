@@ -4,7 +4,6 @@ import ecommerce.dao.OrderDao;
 import ecommerce.db.Storage;
 import ecommerce.lib.Dao;
 import ecommerce.model.Order;
-import ecommerce.model.ShoppingCart;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,8 +12,7 @@ import java.util.stream.Collectors;
 public class OrderDaoImpl implements OrderDao {
 
     @Override
-    public Order completeOrder(ShoppingCart shoppingCart) {
-        Order order = new Order(shoppingCart.getUserId());
+    public Order create(Order order) {
         Storage.addOrder(order);
         return order;
     }

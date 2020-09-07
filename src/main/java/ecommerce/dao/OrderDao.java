@@ -1,13 +1,12 @@
 package ecommerce.dao;
 
 import ecommerce.model.Order;
-import ecommerce.model.ShoppingCart;
 import java.util.List;
 import java.util.Optional;
 
 public interface OrderDao {
 
-    Order completeOrder(ShoppingCart shoppingCart);
+    Order create(Order order);
 
     List<Order> getUserOrders(Long userId);
 

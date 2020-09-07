@@ -11,11 +11,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Inject
-    UserDao userDao;
+    private UserDao userDao;
 
     @Override
     public User create(User user) {
-        return userDao.createUser(user);
+        return userDao.create(user);
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 @Dao
 public class UserDaoImpl implements UserDao {
     @Override
-    public User createUser(User user) {
+    public User create(User user) {
         Storage.addUser(user);
         return user;
     }
