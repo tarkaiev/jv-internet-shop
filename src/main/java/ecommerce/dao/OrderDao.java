@@ -2,11 +2,10 @@ package ecommerce.dao;
 
 import ecommerce.model.Order;
 import ecommerce.model.ShoppingCart;
-
 import java.util.List;
 import java.util.Optional;
 
-public interface OderDao {
+public interface OrderDao {
 
     Order completeOrder(ShoppingCart shoppingCart);
 

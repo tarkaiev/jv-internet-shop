@@ -1,7 +1,6 @@
 package ecommerce.dao;
 
 import ecommerce.model.ShoppingCart;
-
 import java.util.List;
 import java.util.Optional;
 
