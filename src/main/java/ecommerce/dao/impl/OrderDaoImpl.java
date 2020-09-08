@@ -7,6 +7,7 @@ import ecommerce.model.Order;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
@@ -34,6 +35,14 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> getAll() {
         return Storage.orders;
+    }
+
+    @Override
+    public Order update(Order element) {
+        IntStream.range(0, Storage.orders.size())
+                .filter(i -> Storage.orders.get(i).getId().equals(element.getId()))
+                .forEach(i -> Storage.orders.set(i, element));
+        return element;
     }
 
     @Override
