@@ -1,6 +1,6 @@
 package ecommerce.dao.impl;
 
-import ecommerce.dao.ShoppingCartDao;
+import ecommerce.dao.interfaces.ShoppingCartDao;
 import ecommerce.db.Storage;
 import ecommerce.lib.Dao;
 import ecommerce.model.ShoppingCart;
@@ -14,6 +14,13 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     public ShoppingCart create(ShoppingCart cart) {
         Storage.addShoppingCart(cart);
         return cart;
+    }
+
+    @Override
+    public Optional<ShoppingCart> get(Long id) {
+        return Storage.shoppingCarts.stream()
+                .filter(cart -> cart.getId().equals(id))
+                .findFirst();
     }
 
     @Override

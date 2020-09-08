@@ -4,10 +4,10 @@ import ecommerce.lib.Injector;
 import ecommerce.model.Product;
 import ecommerce.model.ShoppingCart;
 import ecommerce.model.User;
-import ecommerce.service.OrderService;
-import ecommerce.service.ProductService;
-import ecommerce.service.ShoppingCartService;
-import ecommerce.service.UserService;
+import ecommerce.service.interfaces.OrderService;
+import ecommerce.service.interfaces.ProductService;
+import ecommerce.service.interfaces.ShoppingCartService;
+import ecommerce.service.interfaces.UserService;
 
 public class MainApp {
     private static Injector injector = Injector.getInstance("ecommerce");
@@ -24,20 +24,20 @@ public class MainApp {
         productService.create(iphone3);
 
         System.out.println("all products after creation:");
-        for (Product product : productService.getAllProducts()) {
+        for (Product product : productService.getAll()) {
             System.out.println(product);
         }
 
         System.out.println("updating price for iphone1");
-        Product iphoneUpdate = new Product(productService.get(1));
+        Product iphoneUpdate = new Product(productService.get(1L));
         iphoneUpdate.setPrice(499.99);
         productService.update(iphoneUpdate);
-        System.out.println(productService.get(1));
+        System.out.println(productService.get(1L));
 
         System.out.println("deleting iphone1");
-        productService.delete(1);
+        productService.delete(1L);
 
-        productService.getAllProducts().forEach(System.out::println);
+        productService.getAll().forEach(System.out::println);
 
         System.out.println("TESTING USER SERVICE");
         UserService userService = (UserService) injector.getInstance(UserService.class);

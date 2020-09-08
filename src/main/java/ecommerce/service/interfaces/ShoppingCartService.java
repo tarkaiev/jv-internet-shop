@@ -1,11 +1,10 @@
-package ecommerce.service;
+package ecommerce.service.interfaces;
 
 import ecommerce.model.Product;
 import ecommerce.model.ShoppingCart;
+import ecommerce.service.GenericService;
 
-public interface ShoppingCartService {
-    ShoppingCart create(ShoppingCart shoppingCart);
-
+public interface ShoppingCartService extends GenericService<ShoppingCart, Long> {
     ShoppingCart addProduct(ShoppingCart shoppingCart, Product product);
 
     boolean deleteProduct(ShoppingCart shoppingCart, Product product);
@@ -13,6 +12,4 @@ public interface ShoppingCartService {
     void clear(ShoppingCart shoppingCart);
 
     ShoppingCart getByUserId(Long userId);
-
-    boolean delete(ShoppingCart shoppingCart);
 }

@@ -1,6 +1,6 @@
 package ecommerce.dao.impl;
 
-import ecommerce.dao.UserDao;
+import ecommerce.dao.interfaces.UserDao;
 import ecommerce.db.Storage;
 import ecommerce.lib.Dao;
 import ecommerce.model.User;
@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 @Dao
 public class UserDaoImpl implements UserDao {
+
     @Override
     public User create(User user) {
         Storage.addUser(user);

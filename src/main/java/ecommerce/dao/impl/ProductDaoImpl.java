@@ -1,6 +1,6 @@
 package ecommerce.dao.impl;
 
-import ecommerce.dao.ProductDao;
+import ecommerce.dao.interfaces.ProductDao;
 import ecommerce.db.Storage;
 import ecommerce.lib.Dao;
 import ecommerce.model.Product;
@@ -25,7 +25,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<Product> getAll() {
         return Storage.products;
     }
 

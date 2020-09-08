@@ -1,10 +1,10 @@
 package ecommerce.service.impl;
 
-import ecommerce.dao.UserDao;
+import ecommerce.dao.interfaces.UserDao;
 import ecommerce.lib.Inject;
 import ecommerce.lib.Service;
 import ecommerce.model.User;
-import ecommerce.service.UserService;
+import ecommerce.service.interfaces.UserService;
 import java.util.List;
 
 @Service

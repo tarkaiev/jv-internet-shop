@@ -1,10 +1,10 @@
 package ecommerce.service.impl;
 
-import ecommerce.dao.ProductDao;
+import ecommerce.dao.interfaces.ProductDao;
 import ecommerce.lib.Inject;
 import ecommerce.lib.Service;
 import ecommerce.model.Product;
-import ecommerce.service.ProductService;
+import ecommerce.service.interfaces.ProductService;
 import java.util.List;
 
 @Service
@@ -18,13 +18,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product get(long id) {
-        return productDao.get(id).orElseThrow();
+    public Product get(Long id) {
+        return productDao.get(id).get();
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return productDao.getAllProducts();
+    public List<Product> getAll() {
+        return productDao.getAll();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean delete(long id) {
+    public boolean delete(Long id) {
         return productDao.delete(id);
     }
 }
