@@ -1,6 +1,6 @@
 package ecommerce.dao.impl;
 
-import ecommerce.dao.ShoppingCartDao;
+import ecommerce.dao.interfaces.ShoppingCartDao;
 import ecommerce.db.Storage;
 import ecommerce.lib.Dao;
 import ecommerce.model.ShoppingCart;

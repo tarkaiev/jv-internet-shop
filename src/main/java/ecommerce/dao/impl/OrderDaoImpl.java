@@ -1,6 +1,6 @@
 package ecommerce.dao.impl;
 
-import ecommerce.dao.OrderDao;
+import ecommerce.dao.interfaces.OrderDao;
 import ecommerce.db.Storage;
 import ecommerce.lib.Dao;
 import ecommerce.model.Order;
