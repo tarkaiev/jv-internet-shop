@@ -5,7 +5,6 @@ import ecommerce.model.ShoppingCart;
 import ecommerce.service.GenericService;
 
 public interface ShoppingCartService extends GenericService<ShoppingCart, Long> {
-
     ShoppingCart addProduct(ShoppingCart shoppingCart, Product product);
 
     boolean deleteProduct(ShoppingCart shoppingCart, Product product);
@@ -13,5 +12,4 @@ public interface ShoppingCartService extends GenericService<ShoppingCart, Long> 
     void clear(ShoppingCart shoppingCart);
 
     ShoppingCart getByUserId(Long userId);
-
 }
