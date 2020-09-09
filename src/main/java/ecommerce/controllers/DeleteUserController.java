@@ -1,0 +1,23 @@
+package ecommerce.controllers;
+
+import ecommerce.lib.Injector;
+import ecommerce.service.interfaces.UserService;
+import java.io.IOException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/deleteUser")
+public class DeleteUserController extends HttpServlet {
+    private static final Injector injector = Injector.getInstance("ecommerce");
+    private final UserService userService = (UserService) injector.getInstance(UserService.class);
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException {
+        Long userId = Long.valueOf(req.getParameter("userId"));
+        userService.delete(userId);
+        resp.sendRedirect(req.getContextPath() + "/user/all");
+    }
+}
