@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Shopping cart</title>
+    <title>All products for admin</title>
 </head>
 <body>
 <table border="1">
@@ -23,23 +23,15 @@
                 <c:out value="${product.price}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/cart/delete?id=${product.id}">
-                    Delete from the cart</a>
+                <form action="${pageContext.request.contextPath}/product/delete" method="post">
+                    <input type="hidden" name="productId" value="${product.id}">
+                    <button type="submit" class="btn-danger">Delete product</button>
+                </form>
             </td>
         </tr>
     </c:forEach>
-    <tr>
-        <td colspan="2">
-            <form action="${pageContext.request.contextPath}/order/complete" method="post">
-                <input type="hidden" name="shoppingCartId" value="${shoppingCartId}">
-                <button type="submit" class="btn-success">Create order</button>
-            </form>
-        </td>
-    </tr>
 </table>
-<a href="${pageContext.request.contextPath}/registration">Sign up</a><br>
-<a href="${pageContext.request.contextPath}/user/all">All users</a><br>
-<a href="${pageContext.request.contextPath}/product/all">All products</a><br>
+<a href="${pageContext.request.contextPath}/product/add">Add product</a><br>
 <a href="${pageContext.request.contextPath}/">Main page</a><br>
 </body>
 </html>

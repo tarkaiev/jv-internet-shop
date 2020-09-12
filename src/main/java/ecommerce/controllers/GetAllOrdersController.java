@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("order/all")
+@WebServlet("/admin/order/all")
 public class GetAllOrdersController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("ecommerce");
     private final OrderService orderService
@@ -22,6 +22,6 @@ public class GetAllOrdersController extends HttpServlet {
             throws ServletException, IOException {
         List<Order> orders = orderService.getAll();
         req.setAttribute("orders", orders);
-        req.getRequestDispatcher("/WEB-INF/views/order/all/jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/order/all.jsp").forward(req, resp);
     }
 }
