@@ -28,7 +28,7 @@
         </tr>
     </c:forEach>
 </table>
-<a href="${pageContext.request.contextPath}/current/cart">Show cart</a><br>
+<a href="${pageContext.request.contextPath}/cart/current">Show cart</a><br>
 <a href="${pageContext.request.contextPath}/product/add">Add product</a><br>
 <a href="${pageContext.request.contextPath}/user/all">All users</a><br>
 <a href="${pageContext.request.contextPath}/">Main page</a><br>
