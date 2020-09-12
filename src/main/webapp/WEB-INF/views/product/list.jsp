@@ -25,7 +25,7 @@
             <td>
                 <form action="${pageContext.request.contextPath}/product/delete" method="post">
                     <input type="hidden" name="productId" value="${product.id}">
-                    <button type="submit" class="btn-danger">Delete product</button>
+                    <button type="submit">Delete product</button>
                 </form>
             </td>
         </tr>

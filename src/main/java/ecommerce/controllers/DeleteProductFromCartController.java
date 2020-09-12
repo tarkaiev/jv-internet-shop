@@ -4,7 +4,6 @@ import ecommerce.lib.Injector;
 import ecommerce.service.interfaces.ProductService;
 import ecommerce.service.interfaces.ShoppingCartService;
 import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
