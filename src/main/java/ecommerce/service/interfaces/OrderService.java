@@ -9,4 +9,6 @@ public interface OrderService extends GenericService<Order, Long> {
     Order completeOrder(ShoppingCart shoppingCart);
 
     List<Order> getUserOrders(Long userId);
+
+    Double getTotalSum(Order order);
 }

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>All products:</title>
+    <title>All products for admin</title>
 </head>
 <body>
 <table border="1">
@@ -23,14 +23,15 @@
                 <c:out value="${product.price}"/>
             </td>
             <td>
-                <a href="/product/buy?id=${product.id}">Add to cart</a>
+                <form action="${pageContext.request.contextPath}/product/delete" method="post">
+                    <input type="hidden" name="productId" value="${product.id}">
+                    <button type="submit">Delete product</button>
+                </form>
             </td>
         </tr>
     </c:forEach>
 </table>
-<a href="${pageContext.request.contextPath}/cart/current">Show cart</a><br>
 <a href="${pageContext.request.contextPath}/product/add">Add product</a><br>
-<a href="${pageContext.request.contextPath}/user/all">All users</a><br>
 <a href="${pageContext.request.contextPath}/">Main page</a><br>
 </body>
 </html>

@@ -22,8 +22,19 @@
             <td>
                 <c:out value="${product.price}"/>
             </td>
+            <td>
+                <a href="${pageContext.request.contextPath}/cart/delete?id=${product.id}">
+                    Delete from the cart</a>
+            </td>
         </tr>
     </c:forEach>
+    <tr>
+        <td colspan="2">
+            <form action="${pageContext.request.contextPath}/order/complete" method="post">
+                <input type="hidden" name="shoppingCartId" value="${shoppingCartId}">
+                <button type="submit">Create order</button>
+        </td>
+    </tr>
 </table>
 <a href="${pageContext.request.contextPath}/registration">Sign up</a><br>
 <a href="${pageContext.request.contextPath}/user/all">All users</a><br>
