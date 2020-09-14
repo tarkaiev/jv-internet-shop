@@ -32,8 +32,7 @@
         <td colspan="2">
             <form action="${pageContext.request.contextPath}/order/complete" method="post">
                 <input type="hidden" name="shoppingCartId" value="${shoppingCartId}">
-                <button type="submit" class="btn-success">Create order</button>
-            </form>
+                <button type="submit">Create order</button>
         </td>
     </tr>
 </table>

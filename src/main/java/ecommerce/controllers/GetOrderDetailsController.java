@@ -2,7 +2,6 @@ package ecommerce.controllers;
 
 import ecommerce.lib.Injector;
 import ecommerce.model.Order;
-import ecommerce.model.Product;
 import ecommerce.service.interfaces.OrderService;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -23,10 +22,7 @@ public class GetOrderDetailsController extends HttpServlet {
         Long orderId = Long.parseLong(req.getParameter("id"));
         Order order = orderService.get(orderId);
         req.setAttribute("order", order);
-        double totalSum = 0.0;
-        for (Product p : order.getProducts()) {
-            totalSum += p.getPrice();
-        }
+        Double totalSum = orderService.getTotalSum(order);
         req.setAttribute("totalSum", totalSum);
         req.getRequestDispatcher("/WEB-INF/views/order/details.jsp").forward(req, resp);
     }

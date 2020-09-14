@@ -4,6 +4,7 @@ import ecommerce.dao.interfaces.OrderDao;
 import ecommerce.lib.Inject;
 import ecommerce.lib.Service;
 import ecommerce.model.Order;
+import ecommerce.model.Product;
 import ecommerce.model.ShoppingCart;
 import ecommerce.service.interfaces.OrderService;
 import ecommerce.service.interfaces.ShoppingCartService;
@@ -29,6 +30,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getUserOrders(Long userId) {
         return orderDao.getUserOrders(userId);
+    }
+
+    @Override
+    public Double getTotalSum(Order order) {
+        double totalSum = 0.0;
+        for (Product p : order.getProducts()) {
+            totalSum += p.getPrice();
+        }
+        return totalSum;
     }
 
     @Override

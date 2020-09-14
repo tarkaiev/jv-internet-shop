@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/cart/current")
-public class CurrentCartController extends HttpServlet {
+public class GetUserCartController extends HttpServlet {
     private static final Long USER_ID = 1L;
     private static final Injector injector = Injector.getInstance("ecommerce");
     private final ShoppingCartService shoppingCartService
@@ -25,7 +25,7 @@ public class CurrentCartController extends HttpServlet {
         ShoppingCart currentShoppingCart = shoppingCartService.getByUserId(USER_ID);
         List<Product> products = currentShoppingCart.getProducts();
         req.setAttribute("products", products);
-        req.setAttribute("shoppingCartId", shoppingCartService.getByUserId(USER_ID).getId());
+        req.setAttribute("shoppingCartId", currentShoppingCart.getId());
         req.getRequestDispatcher("/WEB-INF/views/cart/shoppingCart.jsp").forward(req, resp);
     }
 }
