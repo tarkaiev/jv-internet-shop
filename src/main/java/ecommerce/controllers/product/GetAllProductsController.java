@@ -1,4 +1,4 @@
-package ecommerce.controllers;
+package ecommerce.controllers.product;
 
 import ecommerce.lib.Injector;
 import ecommerce.model.Product;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/product/all")
-public class AdminProductListController extends HttpServlet {
+@WebServlet("/product/all")
+public class GetAllProductsController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("ecommerce");
     private final ProductService productService
             = (ProductService) injector.getInstance(ProductService.class);
@@ -20,8 +20,9 @@ public class AdminProductListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<Product> products = productService.getAll();
-        req.setAttribute("products", products);
-        req.getRequestDispatcher("/WEB-INF/views/product/list.jsp").forward(req, resp);
+        List<Product> allProducts = productService.getAll();
+        req.setAttribute("products", allProducts);
+        req.getRequestDispatcher("/WEB-INF/views/product/all.jsp").forward(req, resp);
     }
+
 }
