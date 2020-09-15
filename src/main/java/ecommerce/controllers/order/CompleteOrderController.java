@@ -1,4 +1,4 @@
-package ecommerce.controllers;
+package ecommerce.controllers.order;
 
 import ecommerce.lib.Injector;
 import ecommerce.model.Order;

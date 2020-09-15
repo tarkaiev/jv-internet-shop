@@ -1,4 +1,4 @@
-package ecommerce.controllers;
+package ecommerce.controllers.user;
 
 import ecommerce.lib.Injector;
 import ecommerce.service.interfaces.ShoppingCartService;
