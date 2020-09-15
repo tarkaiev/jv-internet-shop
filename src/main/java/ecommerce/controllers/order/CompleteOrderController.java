@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/order/complete")
 public class CompleteOrderController extends HttpServlet {
-    private static final Long USER_ID = 1L;
+    private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("ecommerce");
     private final OrderService orderService
             = (OrderService) injector.getInstance(OrderService.class);
@@ -22,7 +22,8 @@ public class CompleteOrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        Order order = orderService.completeOrder(shoppingCartService.getByUserId(USER_ID));
+        Long userId = (Long) req.getSession().getAttribute(USER_ID);
+        Order order = orderService.completeOrder(shoppingCartService.getByUserId(userId));
         resp.sendRedirect(req.getContextPath() + "/user/order?id=" + order.getId());
     }
 }

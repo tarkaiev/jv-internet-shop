@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/cart/delete")
 public class DeleteProductFromCartController extends HttpServlet {
-    private static final Long USER_ID = 1L;
+    private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("ecommerce");
     private final ProductService productService
             = (ProductService) injector.getInstance(ProductService.class);
@@ -22,7 +22,8 @@ public class DeleteProductFromCartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         Long productId = Long.parseLong(req.getParameter("id"));
-        shoppingCartService.deleteProduct(shoppingCartService.getByUserId(USER_ID),
+        Long userId = (Long) req.getSession().getAttribute(USER_ID);
+        shoppingCartService.deleteProduct(shoppingCartService.getByUserId(userId),
                 productService.get(productId));
         resp.sendRedirect(req.getContextPath() + "/cart/current");
     }
