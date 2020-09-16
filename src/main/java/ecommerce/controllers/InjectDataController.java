@@ -7,7 +7,7 @@ import ecommerce.model.User;
 import ecommerce.service.interfaces.ProductService;
 import ecommerce.service.interfaces.UserService;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +32,7 @@ public class InjectDataController extends HttpServlet {
         productService.create(
                 new Product("iPhone3", 2999.99));
         User admin = new User("admin", "admin", "admin");
-        admin.setRoles(List.of(Role.of("ADMIN")));
+        admin.setRoles(Set.of(Role.of("ADMIN")));
         userService.create(admin);
 
         req.getRequestDispatcher("/WEB-INF/views/injected.jsp").forward(req, resp);

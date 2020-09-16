@@ -7,7 +7,7 @@ import ecommerce.model.User;
 import ecommerce.service.interfaces.ShoppingCartService;
 import ecommerce.service.interfaces.UserService;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +37,7 @@ public class RegistrationController extends HttpServlet {
 
         if (password.equals(passwordRepeated)) {
             User user = new User(name, login, password);
-            user.setRoles(List.of(Role.of("USER")));
+            user.setRoles(Set.of(Role.of("USER")));
             userService.create(user);
             ShoppingCart shoppingCart = new ShoppingCart(user.getId());
             shoppingCartService.create(shoppingCart);
