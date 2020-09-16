@@ -12,6 +12,7 @@
 <a href="${pageContext.request.contextPath}/user/all">All users</a><br>
 <a href="${pageContext.request.contextPath}/product/all">All products</a><br>
 <a href="${pageContext.request.contextPath}/inject">Put some products to DB</a><br>
+<a href="${pageContext.request.contextPath}/logout">Logout</a><br>
 </div>
 </body>
 </html>
