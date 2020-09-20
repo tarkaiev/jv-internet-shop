@@ -2,13 +2,11 @@ package ecommerce.dao.impl;
 
 import ecommerce.dao.interfaces.ProductDao;
 import ecommerce.db.Storage;
-import ecommerce.lib.Dao;
 import ecommerce.model.Product;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-@Dao
 public class ProductDaoImpl implements ProductDao {
 
     @Override
