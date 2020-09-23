@@ -51,6 +51,7 @@ public class UserDaoJdbcImpl implements UserDao {
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
                 user.setId(resultSet.getLong(1));
+                statement.close();
                 addRolesToUser(user, connection);
                 return user;
             }

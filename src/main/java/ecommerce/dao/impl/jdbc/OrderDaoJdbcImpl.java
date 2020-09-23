@@ -49,6 +49,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
                 order.setId(resultSet.getLong(1));
+                statement.close();
                 addOrderProducts(order, connection);
                 return order;
             }
@@ -103,6 +104,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             statement.setLong(1, order.getUserId());
             statement.setLong(2, order.getId());
             statement.executeUpdate();
+            statement.close();
             deleteOrderFromOrdersProducts(order.getId(), connection);
             addOrderProducts(order, connection);
             return order;

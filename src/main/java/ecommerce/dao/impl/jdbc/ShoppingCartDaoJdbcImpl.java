@@ -50,6 +50,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
                 cart.setId(resultSet.getLong(1));
+                statement.close();
                 addCartsProducts(cart, connection);
                 return cart;
             }
