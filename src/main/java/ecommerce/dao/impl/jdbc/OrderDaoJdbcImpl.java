@@ -19,7 +19,7 @@ import java.util.Optional;
 public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public List<Order> getUserOrders(Long userId) {
-        String query = "SELECT * FROM orders WHERE user_id = ?;";
+        String query = "SELECT * FROM orders WHERE user_id = ? AND deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
@@ -59,7 +59,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Optional<Order> get(Long id) {
-        String query = "SELECT * FROM orders WHERE order_id = ?;";
+        String query = "SELECT * FROM orders WHERE order_id = ? AND deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
@@ -78,7 +78,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public List<Order> getAll() {
-        String query = "SELECT * FROM orders;";
+        String query = "SELECT * FROM orders WHERE deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query);
@@ -96,7 +96,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Order update(Order order) {
-        String updateOrderQuery = "UPDATE orders SET user_id = ? WHERE order_id = ?;";
+        String updateOrderQuery = "UPDATE orders SET user_id = ? WHERE order_id = ? AND deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(updateOrderQuery)) {
@@ -113,7 +113,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "DELETE FROM orders WHERE order_id = ?;";
+        String query = "UPDATE orders SET deleted = TRUE WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
@@ -151,7 +151,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     private List<Product> getProductsFromOrderId(Long orderId, Connection connection)
             throws SQLException {
         String query = "SELECT products.* FROM orders_products "
-                + "JOIN products USING (product_id) WHERE order_id = ?;";
+                + "JOIN products USING (product_id) WHERE order_id = ? AND deleted = FALSE;";
         try (PreparedStatement statement
                      = connection.prepareStatement(query)) {
             statement.setLong(1, orderId);

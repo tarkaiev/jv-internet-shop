@@ -21,7 +21,7 @@ import java.util.Set;
 public class UserDaoJdbcImpl implements UserDao {
     @Override
     public Optional<User> findByLogin(String login) {
-        String query = "SELECT * FROM users WHERE login = ?;";
+        String query = "SELECT * FROM users WHERE login = ? AND deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, login);
@@ -61,7 +61,7 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> get(Long id) {
-        String query = "SELECT * FROM users WHERE user_id = ?;";
+        String query = "SELECT * FROM users WHERE user_id = ? AND deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
@@ -81,7 +81,7 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-        String query = "SELECT * FROM users;";
+        String query = "SELECT * FROM users WHERE deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query);
@@ -101,7 +101,7 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public User update(User user) {
         String query = "UPDATE users SET name = ?, login = ?, password = ? "
-                + "WHERE user_id = ?;";
+                + "WHERE user_id = ? AND deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
@@ -118,7 +118,7 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "DELETE FROM users WHERE user_id = ?;";
+        String query = "UPDATE users SET deleted = TRUE WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
