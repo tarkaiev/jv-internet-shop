@@ -9,10 +9,11 @@ CREATE SCHEMA `internet_shop` DEFAULT CHARACTER SET utf8 ;
 CREATE TABLE `internet_shop`.`users` (
                                          `user_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                          `name` VARCHAR(225) NOT NULL,
+                                         `login` VARCHAR(225) NOT NULL,
                                          `password` VARCHAR(225) NOT NULL,
                                          `deleted` VARCHAR(45) NOT NULL DEFAULT 0,
                                          PRIMARY KEY (`user_id`),
-                                         UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
+                                         UNIQUE INDEX `name_UNIQUE` (`login` ASC) VISIBLE);
 CREATE TABLE `internet_shop`.`roles` (
                                          `role_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                          `role_name` VARCHAR(225) NOT NULL,
