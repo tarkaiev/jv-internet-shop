@@ -4,14 +4,14 @@ CREATE SCHEMA `internet_shop` DEFAULT CHARACTER SET utf8 ;
                                              `product_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                              `name` VARCHAR(255) NOT NULL,
                                              `price` DECIMAL(10,2) NOT NULL,
-                                             `deleted` TINYINT UNSIGNED NOT NULL DEFAULT 0 ,
+                                             `deleted` TINYINT UNSIGNED NOT NULL DEFAULT 0,
                                              PRIMARY KEY (`product_id`));
 CREATE TABLE `internet_shop`.`users` (
                                          `user_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                          `name` VARCHAR(225) NOT NULL,
                                          `login` VARCHAR(225) NOT NULL,
                                          `password` VARCHAR(225) NOT NULL,
-                                         `deleted` VARCHAR(45) NOT NULL DEFAULT 0,
+                                         `deleted` TINYINT UNSIGNED NOT NULL DEFAULT 0,
                                          PRIMARY KEY (`user_id`),
                                          UNIQUE INDEX `name_UNIQUE` (`login` ASC) VISIBLE);
 CREATE TABLE `internet_shop`.`roles` (
@@ -22,6 +22,7 @@ CREATE TABLE `internet_shop`.`roles` (
 CREATE TABLE `internet_shop`.`orders` (
                                           `order_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                           `user_id` BIGINT(11) NOT NULL,
+                                          `deleted` TINYINT UNSIGNED NOT NULL DEFAULT 0,
                                           PRIMARY KEY (`order_id`),
                                           INDEX `user_id_idx` (`user_id` ASC) VISIBLE,
                                           CONSTRAINT `user_id`
@@ -32,6 +33,7 @@ CREATE TABLE `internet_shop`.`orders` (
 CREATE TABLE `internet_shop`.`shopping_carts` (
                                                   `cart_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                                   `user_id` BIGINT(11) NOT NULL,
+                                                  `deleted` TINYINT UNSIGNED NOT NULL DEFAULT 0,
                                                   PRIMARY KEY (`cart_id`),
                                                   INDEX `user_id_idx` (`user_id` ASC) VISIBLE,
                                                   CONSTRAINT `user_id_cart`
