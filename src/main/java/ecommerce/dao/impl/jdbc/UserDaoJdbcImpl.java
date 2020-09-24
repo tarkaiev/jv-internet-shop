@@ -25,14 +25,13 @@ public class UserDaoJdbcImpl implements UserDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, login);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    User user = getUserFromResultSet(resultSet);
-                    user.setRoles(getRolesByUserId(user.getId(), connection));
-                    return Optional.of(user);
-                }
-                return Optional.empty();
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                User user = getUserFromResultSet(resultSet);
+                user.setRoles(getRolesByUserId(user.getId(), connection));
+                return Optional.of(user);
             }
+            return Optional.empty();
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get user with login " + login, e);
         }
@@ -48,13 +47,12 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(2, user.getLogin());
             statement.setString(3, user.getPassword());
             statement.executeUpdate();
-            try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                resultSet.next();
-                user.setId(resultSet.getLong(1));
-                statement.close();
-                addRolesToUser(user, connection);
-                return user;
-            }
+            ResultSet resultSet = statement.getGeneratedKeys();
+            resultSet.next();
+            user.setId(resultSet.getLong(1));
+            statement.close();
+            addRolesToUser(user, connection);
+            return user;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't create user" + user.toString(), e);
         }
@@ -67,14 +65,13 @@ public class UserDaoJdbcImpl implements UserDao {
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
             statement.setLong(1, id);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    User user = getUserFromResultSet(resultSet);
-                    user.setRoles(getRolesByUserId(user.getId(), connection));
-                    return Optional.of(user);
-                }
-                return Optional.empty();
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                User user = getUserFromResultSet(resultSet);
+                user.setRoles(getRolesByUserId(user.getId(), connection));
+                return Optional.of(user);
             }
+            return Optional.empty();
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get use with id " + id, e);
         }
@@ -163,13 +160,14 @@ public class UserDaoJdbcImpl implements UserDao {
                 + "JOIN roles USING (role_id) WHERE user_id = ?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, userId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                Set<Role> roles = new HashSet<>();
-                while (resultSet.next()) {
-                    roles.add(Role.of(resultSet.getString("role_name")));
-                }
-                return roles;
+            ResultSet resultSet = statement.executeQuery();
+            Set<Role> roles = new HashSet<>();
+            while (resultSet.next()) {
+                Role role = Role.of(resultSet.getString("role_name"));
+                role.setId(resultSet.getLong("role_id"));
+                roles.add(role);
             }
+            return roles;
         }
     }
 
