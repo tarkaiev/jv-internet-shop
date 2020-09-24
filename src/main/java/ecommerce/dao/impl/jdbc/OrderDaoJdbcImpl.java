@@ -24,14 +24,14 @@ public class OrderDaoJdbcImpl implements OrderDao {
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
             statement.setLong(1, userId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                List<Order> allOrders = new ArrayList<>();
-                while (resultSet.next()) {
-                    Order order = getOrderFromResultSet(resultSet, connection);
-                    allOrders.add(order);
-                }
-                return allOrders;
+            ResultSet resultSet = statement.executeQuery();
+            List<Order> allOrders = new ArrayList<>();
+            while (resultSet.next()) {
+                Order order = getOrderFromResultSet(resultSet, connection);
+                allOrders.add(order);
             }
+            return allOrders;
+
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get order of user with id " + userId, e);
         }

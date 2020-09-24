@@ -111,6 +111,8 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(3, user.getPassword());
             statement.setLong(5, user.getId());
             statement.executeUpdate();
+            deleteUserFromRoles(user.getId(), connection);
+            addRolesToUser(user, connection);
             return user;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't update user " + user, e);
@@ -123,10 +125,8 @@ public class UserDaoJdbcImpl implements UserDao {
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
-            deleteUserFromRoles(id, connection);
             statement.setLong(1, id);
-            int deleted = statement.executeUpdate();
-            return deleted != 0;
+            return statement.executeUpdate() != 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete user with ID " + id, e);
         }
@@ -149,12 +149,11 @@ public class UserDaoJdbcImpl implements UserDao {
                          = connection.prepareStatement(addRolesQuery)) {
             for (Role role : user.getRoles()) {
                 selectStatement.setString(1, role.getRoleName().name());
-                try (ResultSet resultSet = selectStatement.executeQuery()) {
-                    resultSet.next();
-                    insertStatement.setLong(1, user.getId());
-                    insertStatement.setLong(2, resultSet.getLong("role_id"));
-                    insertStatement.executeUpdate();
-                }
+                ResultSet resultSet = selectStatement.executeQuery();
+                resultSet.next();
+                insertStatement.setLong(1, user.getId());
+                insertStatement.setLong(2, resultSet.getLong("role_id"));
+                insertStatement.executeUpdate();
             }
         }
     }
