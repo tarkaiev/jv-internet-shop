@@ -27,6 +27,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 ShoppingCart shoppingCart = getShoppingCartFromResultSet(resultSet);
+                statement.close();
                 long id = shoppingCart.getId();
                 shoppingCart.setProducts(getProductsFromShoppingCartId(id, connection));
                 return Optional.of(shoppingCart);
@@ -67,6 +68,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 ShoppingCart shoppingCart = getShoppingCartFromResultSet(resultSet);
+                statement.close();
                 shoppingCart.setProducts(getProductsFromShoppingCartId(id, connection));
                 return Optional.of(shoppingCart);
             }
@@ -86,9 +88,12 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             List<ShoppingCart> allCarts = new ArrayList<>();
             while (resultSet.next()) {
                 ShoppingCart shoppingCart = getShoppingCartFromResultSet(resultSet);
-                shoppingCart.setProducts(
-                        getProductsFromShoppingCartId(shoppingCart.getId(), connection));
                 allCarts.add(shoppingCart);
+            }
+            statement.close();
+            for (ShoppingCart cart : allCarts) {
+                cart.setProducts(List.copyOf(
+                        getProductsFromShoppingCartId(cart.getId(), connection)));
             }
             return allCarts;
         } catch (SQLException e) {
@@ -106,6 +111,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             statement.setLong(1, cart.getUserId());
             statement.setLong(2, cart.getId());
             statement.executeUpdate();
+            statement.close();
             deleteCartsProducts(cart.getId(), connection);
             addCartsProducts(cart, connection);
             return cart;

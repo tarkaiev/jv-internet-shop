@@ -28,6 +28,7 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 User user = getUserFromResultSet(resultSet);
+                statement.close();
                 user.setRoles(getRolesByUserId(user.getId(), connection));
                 return Optional.of(user);
             }
@@ -68,6 +69,7 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 User user = getUserFromResultSet(resultSet);
+                statement.close();
                 user.setRoles(getRolesByUserId(user.getId(), connection));
                 return Optional.of(user);
             }
@@ -87,8 +89,11 @@ public class UserDaoJdbcImpl implements UserDao {
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
                 User user = getUserFromResultSet(resultSet);
-                user.setRoles(getRolesByUserId(user.getId(), connection));
                 users.add(user);
+            }
+            statement.close();
+            for (User user : users) {
+                user.setRoles(getRolesByUserId(user.getId(), connection));
             }
             return users;
         } catch (SQLException e) {
@@ -108,6 +113,7 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(3, user.getPassword());
             statement.setLong(5, user.getId());
             statement.executeUpdate();
+            statement.close();
             deleteUserFromRoles(user.getId(), connection);
             addRolesToUser(user, connection);
             return user;
@@ -156,7 +162,7 @@ public class UserDaoJdbcImpl implements UserDao {
     }
 
     private Set<Role> getRolesByUserId(Long userId, Connection connection) throws SQLException {
-        String query = "SELECT role_name FROM users_roles "
+        String query = "SELECT * FROM users_roles "
                 + "JOIN roles USING (role_id) WHERE user_id = ?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, userId);
