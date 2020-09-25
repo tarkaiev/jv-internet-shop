@@ -66,4 +66,5 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public ShoppingCart getByUserId(Long userId) {
         return shoppingCartDao.getByUserId(userId).get();
     }
+
 }
