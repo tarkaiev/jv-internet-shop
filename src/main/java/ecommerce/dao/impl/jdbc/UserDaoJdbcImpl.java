@@ -40,13 +40,14 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User create(User user) {
-        String query = "INSERT INTO users (name, login, password) VALUES (?, ?, ?);";
+        String query = "INSERT INTO users (name, login, password, salt) VALUES (?, ?, ?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
             statement.setString(3, user.getPassword());
+            statement.setBytes(4, user.getSalt());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
@@ -103,7 +104,7 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        String query = "UPDATE users SET name = ?, login = ?, password = ? "
+        String query = "UPDATE users SET name = ?, login = ?, password = ?, salt = ? "
                 + "WHERE user_id = ? AND deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
@@ -111,6 +112,7 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
             statement.setString(3, user.getPassword());
+            statement.setBytes(4, user.getSalt());
             statement.setLong(5, user.getId());
             statement.executeUpdate();
             statement.close();
@@ -140,7 +142,8 @@ public class UserDaoJdbcImpl implements UserDao {
         String name = resultSet.getString("name");
         String login = resultSet.getString("login");
         String password = resultSet.getString("password");
-        return new User(id, name, login, password);
+        byte[] salt = resultSet.getBytes("salt");
+        return new User(id, name, login, password, salt);
     }
 
     private void addRolesToUser(User user, Connection connection) throws SQLException {
