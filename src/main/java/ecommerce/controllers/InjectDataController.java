@@ -31,9 +31,9 @@ public class InjectDataController extends HttpServlet {
                 new Product("iPhone2", 1999.99));
         productService.create(
                 new Product("iPhone3", 2999.99));
-        User admin = new User("admin", "admin", "admin");
-        admin.setRoles(Set.of(Role.of("ADMIN")));
-        userService.create(admin);
+        User admin1 = new User("admin1", "admin1", "admin1");
+        admin1.setRoles(Set.of(Role.of("ADMIN")));
+        userService.create(admin1);
 
         req.getRequestDispatcher("/WEB-INF/views/injected.jsp").forward(req, resp);
     }

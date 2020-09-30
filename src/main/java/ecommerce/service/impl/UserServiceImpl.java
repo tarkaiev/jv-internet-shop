@@ -5,6 +5,7 @@ import ecommerce.lib.Inject;
 import ecommerce.lib.Service;
 import ecommerce.model.User;
 import ecommerce.service.interfaces.UserService;
+import ecommerce.util.HashUtil;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        byte[] salt = HashUtil.getSalt();
+        String password = HashUtil.hashPassword(user.getPassword(), salt);
+        user.setPassword(password);
+        user.setSalt(salt);
         return userDao.create(user);
     }
 
